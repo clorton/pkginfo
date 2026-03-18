@@ -20,6 +20,10 @@ def extract_docstrings(package, output, modules, classes, functions):
 
     docstrings = {}
 
+    # Extract docstring from the main package if modules is True
+    if modules:
+        docstrings[package] = inspect.getdoc(pkg)
+
     # Walk through the package and extract docstrings
     for importer, modname, ispkg in pkgutil.walk_packages(
         pkg.__path__, pkg.__name__ + "."
@@ -42,4 +46,4 @@ def extract_docstrings(package, output, modules, classes, functions):
     with open(output, "w") as f:
         json.dump(docstrings, f, indent=4)
 
-    return
+    return len([k for k, v in docstrings.items() if v is None])

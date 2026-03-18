@@ -16,35 +16,37 @@ A tool for extracting docstrings from Python packages.
     help="Output file for the extracted docstrings.",
 )
 @click.option(
-    "-m",
-    "--modules",
-    is_flag=True,
-    flag_value=False,
+    "--modules/--no-modules",
     default=True,
-    help="Do _not_ extract docstrings from modules.",
+    help="Extract docstrings from modules.",
 )
 @click.option(
-    "-c",
-    "--classes",
-    is_flag=True,
-    flag_value=False,
+    "--classes/--no-classes",
     default=True,
-    help="Do _not_ extract docstrings from classes.",
+    help="Extract docstrings from classes.",
 )
 @click.option(
-    "-f",
-    "--functions",
-    is_flag=True,
-    flag_value=False,
+    "--functions/--no-functions",
     default=True,
-    help="Do _not_ extract docstrings from functions.",
+    help="Extract docstrings from functions.",
 )
 def cli(package, output, modules, classes, functions):
 
-    extract_docstrings(package, output, modules, classes, functions)
+    print(
+        {
+            "package": package,
+            "output": output,
+            "modules": modules,
+            "classes": classes,
+            "functions": functions,
+        }
+    )
+    num_none = extract_docstrings(package, output, modules, classes, functions)
 
-    return
+    return num_none
 
 
 if __name__ == "__main__":
-    cli()
+    import sys
+
+    sys.exit(cli())
