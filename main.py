@@ -1,5 +1,5 @@
 def main():
-    print("Hello from docstrings!")
+    print("Hello from pkginfo!")
 
 
 if __name__ == "__main__":
