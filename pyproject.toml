@@ -16,3 +16,8 @@ dependencies = [
 [project.scripts]
 docstrings = "pkginfo.strings:cli"
 arginfo = "pkginfo.args:cli"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
