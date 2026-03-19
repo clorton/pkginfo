@@ -1,3 +1,11 @@
+"""
+Command-line interface for extracting function and method signatures from Python packages.
+
+This module provides the arginfo CLI tool that extracts type annotations,
+parameter names, default values, and return types from functions and methods
+in a Python package. Results are saved to a JSON file.
+"""
+
 from pathlib import Path
 
 import click

@@ -1,3 +1,11 @@
+"""
+Implementation module for extracting docstrings and function signatures from Python packages.
+
+This module provides the core functionality for introspecting Python packages
+and extracting documentation and signature information. It uses the inspect
+module to walk through package modules and extract relevant metadata.
+"""
+
 from pathlib import Path
 
 

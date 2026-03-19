@@ -1,3 +1,11 @@
+"""
+Command-line interface for extracting docstrings from Python packages.
+
+This module provides the docstrings CLI tool that extracts documentation strings
+from modules, classes, and functions in a Python package. Results are saved to
+a JSON file, and the tool returns the count of missing docstrings as its exit code.
+"""
+
 from pathlib import Path
 
 import click

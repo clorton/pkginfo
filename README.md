@@ -1,6 +1,11 @@
 # pkginfo
 Tools for extracting docstrings and argument information from a Python package's modules, classes, and methods.
 
+## Installation
+
+1. clone the repository<br>```git clone https://github.com/clorton/pkginfo.git```
+2. install the package<br>`uv pip intall -e .`
+
 ## Sample Usage
 
 ### docstrings
@@ -69,3 +74,13 @@ arginfo pkginfo
     }
 }
 ```
+
+## Options
+
+- `--help`
+- `-o|--output` write output to the given file
+- `docstrings --no-modules` : don't check for module level docstrings
+- `docstrings --no-classes` : don't check for class docstrings
+- `docstrings --no-functions` : don't check for function docstrings
+- `arginfo --no-classes` : don't report on class method arguments
+- `arginfo --no-functions` : don't report on regular function arguments
