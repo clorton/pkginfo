@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import click
 
 from .impl import extract_docstrings
@@ -12,7 +14,8 @@ A tool for extracting docstrings from Python packages.
 @click.option(
     "--output",
     "-o",
-    default="docstrings.json",
+    default=None,
+    type=Path,
     help="Output file for the extracted docstrings.",
 )
 @click.option(
@@ -30,12 +33,16 @@ A tool for extracting docstrings from Python packages.
     default=True,
     help="Extract docstrings from functions.",
 )
-def cli(package, output, modules, classes, functions):
+def cli(
+    package: str, output: Path, modules: bool, classes: bool, functions: bool
+) -> int:
+
+    output = output or (Path.cwd() / f"{package}.docs.json")
 
     print(
         {
             "package": package,
-            "output": output,
+            "output": str(output),
             "modules": modules,
             "classes": classes,
             "functions": functions,

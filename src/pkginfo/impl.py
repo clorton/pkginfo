@@ -1,10 +1,15 @@
-def extract_docstrings(package, output, modules, classes, functions):
+from pathlib import Path
+
+
+def extract_docstrings(
+    package: str, output: Path, modules: bool, classes: bool, functions: bool
+) -> int:
     """
     Extract docstrings from a Python package and save them to a JSON file.
 
     Args:
         package (str): The name of the package to extract docstrings from.
-        output (str): The path to the output JSON file.
+        output (Path): The path to the output JSON file.
         modules (bool): Whether to extract docstrings from modules.
         classes (bool): Whether to extract docstrings from classes.
         functions (bool): Whether to extract docstrings from functions.
@@ -47,20 +52,19 @@ def extract_docstrings(package, output, modules, classes, functions):
                     docstrings[f"{modname}.{name}"] = inspect.getdoc(obj)
 
     # Save the extracted docstrings to a JSON file
-    with open(output, "w") as f:
+    with output.open("w") as f:
         json.dump(docstrings, f, indent=4)
 
     return len([k for k, v in docstrings.items() if v is None])
 
 
-def extract_args(package, output, classes, functions):
+def extract_args(package: str, output: Path, classes: bool, functions: bool) -> None:
     """
     Extract function and method signatures from a Python package and save them to a JSON file.
 
     Args:
         package (str): The name of the package to extract signatures from.
-        output (str): The path to the output JSON file.
-        modules (bool): Whether to extract module information.
+        output (Path): The path to the output JSON file.
         classes (bool): Whether to extract class method signatures.
         functions (bool): Whether to extract function signatures.
     """
@@ -152,7 +156,7 @@ def extract_args(package, output, classes, functions):
                     }
 
     # Save the extracted signatures to a JSON file
-    with open(output, "w") as f:
+    with output.open("w") as f:
         json.dump(args_info, f, indent=4)
 
     return

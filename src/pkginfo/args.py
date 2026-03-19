@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import click
 
 from .impl import extract_args
@@ -12,7 +14,8 @@ A tool for extracting argument information from Python packages.
 @click.option(
     "--output",
     "-o",
-    default="arginfo.json",
+    default=None,
+    type=Path,
     help="Output file for the extracted argument information.",
 )
 @click.option(
@@ -25,11 +28,14 @@ A tool for extracting argument information from Python packages.
     default=True,
     help="Extract argument information from functions.",
 )
-def cli(package, output, classes, functions):
+def cli(package: str, output: Path, classes: bool, functions: bool) -> int:
+
+    output = output or (Path.cwd() / f"{package}.args.json")
+
     print(
         {
             "package": package,
-            "output": output,
+            "output": str(output),
             "classes": classes,
             "functions": functions,
         }
